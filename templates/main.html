@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <title>Covid-19 Tracker</title>
+    <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      <!-- Meta -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="description" content="Gradient Able Bootstrap admin template made using Bootstrap 4. The starter version of Gradient Able is completely free for personal project." />
+      <meta name="keywords" content="free dashboard template, free admin, free bootstrap template, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
+      <meta name="author" content="codedthemes">
+      <!-- Favicon icon -->
+      <link rel="icon" href="{% static 'assets/images/corona.jpg' %}" >
+      <!-- Google font-->
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+      <!-- Required Fremwork -->
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap/css/bootstrap.min.css' %}">
+      <!-- themify-icons line icon -->
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/icon/themify-icons/themify-icons.css' %}">
+	    <link rel="stylesheet" type="text/css" href="{% static 'assets/icon/font-awesome/css/font-awesome.min.css' %}">
+      <!-- ico font -->
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/icon/icofont/css/icofont.css' %}">
+      <!-- Style.css -->
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/flag.min.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/jquery.mCustomScrollbar.css' %}">
+  </head>
+
+  <body>
+  <body>
+
+       <!-- Pre-loader start -->
+    <div class="theme-loader">
+        <div class="loader-track">
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+    <!-- Pre-loader end -->
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+
+            <nav class="navbar header-navbar pcoded-header">
+               <div class="navbar-wrapper">
+                   <div class="navbar-logo">
+                       <a class="mobile-menu" id="mobile-collapse" href="#!">
+                           <i class="ti-menu"></i>
+                       </a>
+
+                    
+                        
+                    <!--    <div class="mobile-search">
+                        <form action="{% url 'country' %}" class="form-inline my-2 my-lg-0" method="POST">
+                          {% csrf_token %}
+                          <input class="form-control mr-sm-2" type="search" placeholder="Search Symbol" aria-label="Search", name='token'>
+                          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Stock Quote</button>
+                          </form>
+                       </div> -->
+                    
+                       <a href="{% url 'home' %}">
+                           <h6>Covid-19 Tracker</h6>
+                       </a>
+                       <a class="mobile-options">
+                           <i class="ti-more"></i>
+                       </a>
+                   </div>
+
+                   <div class="navbar-container container-fluid">
+                       <ul class="nav-left">
+                           <li>
+                               <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
+                           </li>
+                           <li class="header-search">
+                            <form action="{% url 'country' %}" class="form-inline my-2 my-lg-0" method="POST">
+                              {% csrf_token %}
+                               <div class="main-search morphsearch-search">
+                                   <div class="input-group">
+                                       <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                                       <input type="search" class="form-control" placeholder="Search Country", name='ccode'>
+                                       <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+                                       <button type="submit"></button>
+                                   </div>
+                               </div>
+                             </form>
+                           </li>
+                           <li>
+                               <a href="#!" onclick="javascript:toggleFullScreen()">
+                                   <i class="ti-fullscreen"></i>
+                               </a>
+                           </li>
+                       </ul>
+                       <ul class="nav-right">
+                           <li class="header-notification">
+                               <a href="#!">
+                                   <i class="ti-bell"></i>
+                                   <span class="badge bg-c-pink"></span>
+                               </a>
+                               <ul class="show-notification">
+                                   <li>
+                                       <h6>Notifications</h6>
+                                       <label class="label label-danger">New</label>
+                                   </li>
+                                   <li>
+                                       <div class="media">
+                                          
+                                           <div class="media-body">
+                                               <h5 class="notification-user"><i class="united states flag"></i>USA</h5>
+                                               <p class="notification-msg">Newly Confirmed {{ usnewdata.new_confirmed}}</p>
+                                               <span class="notification-time">5 hours ago</span>
+                                           </div>
+                                       </div>
+                                   </li>
+                                   <li>
+                                       <div class="media">
+                                           
+                                           <div class="media-body">
+                                               <h5 class="notification-user"><i class="in flag"></i>India</h5>
+                                               <p class="notification-msg">Newly Confirmed {{ innewdata.new_confirmed}}</p>
+                                               <span class="notification-time">3 hours ago</span>
+                                           </div>
+                                       </div>
+                                   </li>
+                                   <li>
+                                       <div class="media">
+                                           
+                                           <div class="media-body">
+                                               <h5 class="notification-user"><i class="br flag"></i>Brazil</h5>
+                                               <p class="notification-msg">Newly Confirmed {{ brnewdata.new_confirmed}}</p>
+                                               <span class="notification-time">9 hours ago</span>
+                                           </div>
+                                       </div>
+                                   </li>
+                                   <li>
+                                       <div class="media">
+                                           
+                                           <div class="media-body">
+                                               <h5 class="notification-user"><i class="ru flag"></i>Russia</h5>
+                                               <p class="notification-msg">Newly Confirmed {{ runewdata.new_confirmed}}</p>
+                                               <span class="notification-time">8 hours ago</span>
+                                           </div>
+                                       </div>
+                                   </li>
+                               </ul>
+                           </li>
+                       </ul>
+                   </div>
+               </div>
+           </nav>
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
+                    <nav class="pcoded-navbar">
+                        <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+                        <div class="pcoded-inner-navbar main-menu">
+                            
+                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Country Wise Tracker</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="active">
+                                    <a href="index.html">
+                                        <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                            <div class="pcoded-navigatio-lavel">Top Countries</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li>
+                                    <a href="{% url 'countries' ccode='us' %}">    
+                                        <span class="pcoded-micon"><i class="united states flag"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">USA</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'countries' ccode='in' %}"> 
+                                        <span class="pcoded-micon"><i class="in flag"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">India</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'countries' ccode='br' %}"> 
+                                        <span class="pcoded-micon"><i class="br flag"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Brazil</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'countries' ccode='ru' %}">
+                                        <span class="pcoded-micon"><i class="ru flag"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Russia</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'countries' ccode='fr' %}">
+                                        <span class="pcoded-micon"><i class="fr flag"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">France</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'countries' ccode='it' %}">
+                                        <span class="pcoded-micon"><i class="it flag"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Italy</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </nav>
+
+
+
+
+                    <div class="pcoded-content">
+                        <div class="pcoded-inner-content">
+                            <div class="main-body">
+                                <div class="page-wrapper">
+
+                                    <div class="page-body">
+                                      <div class="row">
+
+                                            <!-- order-card start -->
+                                            <div class="col-md-6 col-xl-3">
+                                                <div class="card bg-c-blue order-card">
+                                                    <div class="card-block">
+                                                        <h6 class="m-b-20">Total Cases</h6>
+                                                        <h2 class="text-right"><i class="ti-wheelchair f-left"></i><span>{{ wdata.confirmed }}</span></h2>
+                                                        <p class="m-b-0">World Data</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-xl-3">
+                                                <div class="card bg-c-green order-card">
+                                                    <div class="card-block">
+                                                        <h6 class="m-b-20">Active Cases</h6>
+                                                        <h2 class="text-right"><i class="ti-hand-point-up f-left"></i><span>{{ wdata.active }}</span></h2>
+                                                        <p class="m-b-0">World Data</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-xl-3">
+                                                <div class="card bg-c-yellow order-card">
+                                                    <div class="card-block">
+                                                        <h6 class="m-b-20">Recovered Cases</h6>
+                                                        <h2 class="text-right"><i class="ti-hand-point-right f-left"></i><span>{{ wdata.recovered }}</span></h2>
+                                                        <p class="m-b-0">World Data</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-xl-3">
+                                                <div class="card bg-c-pink order-card">
+                                                    <div class="card-block">
+                                                        <h6 class="m-b-20">Total Deaths</h6>
+                                                        <h2 class="text-right"><i class="ti-hand-point-down f-left"></i><span>{{ wdata.deaths }}</span></h2>
+                                                        <p class="m-b-0">World Data</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- order-card end -->
+
+                                            <!-- statustic and process start -->
+                                            <div class="col-lg-8 col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>World Covid-19 Statistics</h5>
+                                                        <div class="card-header-right">
+                                                            <ul class="list-unstyled card-option">
+                                                                <li><i class="fa fa-chevron-left"></i></li>
+                                                                <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                                <li><i class="fa fa-minus minimize-card"></i></li>
+                                                                <li><i class="fa fa-refresh reload-card"></i></li>
+                                                                <li><i class="fa fa-times close-card"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-block">
+                                                        <canvas id="Statistics-chart" height="300"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Recovered Vs Deaths</h5>
+                                                    </div>
+                                                    <div class="card-block">
+                                                        <!-- <span class="d-block text-c-blue f-24 f-w-600 text-center">{{ wdata.confirmed }}</span> -->
+                                                        <canvas id="feedback-chart" height="250"></canvas>
+                                                        <div class="row justify-content-center m-t-15">
+                                                            <div class="col-auto b-r-default m-t-5 m-b-5">
+                                                                <h4>{{pichartdata.rper|floatformat:2}}%</h4>
+                                                                <p class="text-success m-b-0"><i class="ti-hand-point-up m-r-5"></i>Recovered</p>
+                                                            </div>
+                                                            <div class="col-auto m-t-5 m-b-5">
+                                                                <h4>{{pichartdata.dper|floatformat:2}}%</h4>
+                                                                <p class="text-danger m-b-0"><i class="ti-hand-point-down m-r-5"></i>Deaths</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- statustic and process end -->
+											<!-- tabs card start -->
+                                            <div class="col-sm-12">
+                                                <div class="card tabs-card">
+                                                    <div class="card-block p-0">
+                                                        <!-- Nav tabs -->
+                                                        <ul class="nav nav-tabs md-tabs" role="tablist">
+                                                            <li class="nav-item">
+                                                                <a class="nav-link active" data-toggle="tab" href="#home3" role="tab"><i class="united states flag"></i>USA</a>
+                                                                <div class="slide"></div>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" data-toggle="tab" href="#profile3" role="tab"><i class="in flag"></i>India</a>
+                                                                <div class="slide"></div>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" data-toggle="tab" href="#messages3" role="tab"><i class="br flag"></i>Brazil</a>
+                                                                <div class="slide"></div>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" data-toggle="tab" href="#settings3" role="tab"><i class="ru flag"></i>Russia</a>
+                                                                <div class="slide"></div>
+                                                            </li>
+                                                        </ul>
+                                                        <!-- Tab panes -->
+                                                        <div class="tab-content card-block">
+                                                            <div class="tab-pane active" id="home3" role="tabpanel">
+
+                                                                <div class="table-responsive">
+                                                                    <table class="table">
+                                                                        <tr>
+                                                                            <th>Date</th>
+                                                                            <th>Total Cases</th>
+                                                                            <th>Active Cases</th>
+                                                                            <th>Total Deaths</th>
+                                                                            <th>New Cases</th>
+                                                                            <th>New Deaths</th>
+                                                                            <th>Total Recovered</th>  
+                                                                        </tr>
+                                                                        
+                                                                        {% for data in usdata %}
+                                                                        <tr>
+                                                                            <td>{{data.date}}</td>
+                                                                            <td>{{data.confirmed}}</td>
+                                                                            <td>{{data.active}}</td>
+                                                                            <td><span class="label label-danger">{{data.deaths}}</span></td>
+                                                                            <td>{{data.new_confirmed}}</td>
+                                                                            <td>{{data.new_deaths}}</td>
+                                                                            <td><span class="label label-success">{{data.recovered}}</span></td>
+                                                                        </tr>
+                                                                        {% endfor %}
+                                                                    </table>
+                                                                </div>
+                                                         
+                                                            </div>
+                                                            <div class="tab-pane" id="profile3" role="tabpanel">
+
+                                                                <div class="table-responsive">
+                                                                    <table class="table">
+                                                                        <tr>
+                                                                            <th>Date</th>
+                                                                            <th>Total Cases</th>
+                                                                            <th>Active Cases</th>
+                                                                            <th>Total Deaths</th>
+                                                                            <th>New Cases</th>
+                                                                            <th>New Deaths</th>
+                                                                            <th>Total Recovered</th>  
+                                                                        </tr>
+                                                                        
+                                                                        {% for data in indata %}
+                                                                        <tr>
+                                                                            <td>{{data.date}}</td>
+                                                                            <td>{{data.confirmed}}</td>
+                                                                            <td>{{data.active}}</td>
+                                                                            <td><span class="label label-danger">{{data.deaths}}</span></td>
+                                                                            <td>{{data.new_confirmed}}</td>
+                                                                            <td>{{data.new_deaths}}</td>
+                                                                            <td><span class="label label-success">{{data.recovered}}</span></td>
+                                                                        </tr>
+                                                                        {% endfor %}
+                                                                    </table>
+                                                                </div>
+                                                              
+                                                            </div>
+                                                            <div class="tab-pane" id="messages3" role="tabpanel">
+
+                                                                <div class="table-responsive">
+                                                                    <table class="table">
+                                                                        <tr>
+                                                                            <th>Date</th>
+                                                                            <th>Total Cases</th>
+                                                                            <th>Active Cases</th>
+                                                                            <th>Total Deaths</th>
+                                                                            <th>New Cases</th>
+                                                                            <th>New Deaths</th>
+                                                                            <th>Total Recovered</th>  
+                                                                        </tr>
+                                                                        
+                                                                        {% for data in brdata %}
+                                                                        <tr>
+                                                                            <td>{{data.date}}</td>
+                                                                            <td>{{data.confirmed}}</td>
+                                                                            <td>{{data.active}}</td>
+                                                                            <td><span class="label label-danger">{{data.deaths}}</span></td>
+                                                                            <td>{{data.new_confirmed}}</td>
+                                                                            <td>{{data.new_deaths}}</td>
+                                                                            <td><span class="label label-success">{{data.recovered}}</span></td>
+                                                                        </tr>
+                                                                        {% endfor %}
+                                                                    </table>
+                                                                </div>
+                                                               
+                                                            </div>
+                                                            <div class="tab-pane" id="settings3" role="tabpanel">
+
+                                                                <div class="table-responsive">
+                                                                    <table class="table">
+                                                                        <tr>
+                                                                            <th>Date</th>
+                                                                            <th>Total Cases</th>
+                                                                            <th>Active Cases</th>
+                                                                            <th>Total Deaths</th>
+                                                                            <th>New Cases</th>
+                                                                            <th>New Deaths</th>
+                                                                            <th>Total Recovered</th>  
+                                                                        </tr>
+                                                                        
+                                                                        {% for data in rudata %}
+                                                                        <tr>
+                                                                            <td>{{data.date}}</td>
+                                                                            <td>{{data.confirmed}}</td>
+                                                                            <td>{{data.active}}</td>
+                                                                            <td><span class="label label-danger">{{data.deaths}}</span></td>
+                                                                            <td>{{data.new_confirmed}}</td>
+                                                                            <td>{{data.new_deaths}}</td>
+                                                                            <td><span class="label label-success">{{data.recovered}}</span></td>
+                                                                        </tr>
+                                                                        {% endfor %}
+                                                                    </table>
+                                                                </div>
+                                                              
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- tabs card end -->
+
+                          
+                                            
+
+                                    <div id="styleSelector">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+<!-- Required Jquery -->
+<script type="text/javascript" src="{% static 'assets/js/jquery/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/jquery-ui/jquery-ui.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/popper.js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- jquery slimscroll js -->
+<script type="text/javascript" src="{% static 'assets/js/jquery-slimscroll/jquery.slimscroll.js' %}"></script>
+<!-- modernizr js -->
+<script type="text/javascript" src="{% static 'assets/js/modernizr/modernizr.js' %}"></script>
+<!-- am chart -->
+<script src="{% static 'assets/pages/widget/amchart/amcharts.min.js' %}"></script>
+<script src="{% static 'assets/pages/widget/amchart/serial.min.js' %}"></script>
+<!-- Chart js -->
+<script type="text/javascript" src="{% static 'assets/js/chart.js/Chart.js' %}"></script>
+<!-- Todo js -->
+<script type="text/javascript " src="{% static 'assets/pages/todo/todo.js' %}"></script>
+<!-- Custom js -->
+<script type="text/javascript" src="{% static 'assets/pages/dashboard/custom-dashboard.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/script.js' %}"></script>
+<script type="text/javascript " src="{% static 'assets/js/SmoothScroll.js' %}"></script>
+<script src="{% static 'assets/js/pcoded.min.js' %}"></script>
+<script src="{% static 'assets/js/vartical-demo.js' %}"></script>
+<script src="{% static 'assets/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+
+<script type="text/javascript">
+
+  $(function() {
+        var ctx = document.getElementById('Statistics-chart').getContext("2d");
+        var greenline = ctx.createLinearGradient(500, 0, 100, 0);
+        greenline.addColorStop(0, '#fd93a8');
+        greenline.addColorStop(1, '#FC6180');
+        var blueline = ctx.createLinearGradient(500, 0, 100, 0);
+        blueline.addColorStop(1, '#56CCF2');
+        blueline.addColorStop(0, '#2F80ED');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{xaxis|safe}},
+                datasets: [{
+                        label: "Confirmed",
+                        borderColor: blueline,
+                        pointBorderColor: blueline,
+                        pointBackgroundColor: blueline,
+                        pointHoverBackgroundColor: blueline,
+                        pointHoverBorderColor: blueline,
+                        pointBorderWidth: 10,
+                        pointHoverRadius: 10,
+                        pointHoverBorderWidth: 1,
+                        pointRadius: 0,
+                        fill: false,
+                        borderWidth: 4,
+                        data: {{yaxis1|safe}}
+                    },
+                    {
+                        label: "Recovered",
+                        borderColor: greenline,
+                        pointBorderColor: greenline,
+                        pointBackgroundColor: greenline,
+                        pointHoverBackgroundColor: greenline,
+                        pointHoverBorderColor: greenline,
+                        pointBorderWidth: 10,
+                        pointHoverRadius: 10,
+                        pointHoverBorderWidth: 1,
+                        pointRadius: 0,
+                        fill: false,
+                        borderWidth: 4,
+                        data: {{yaxis2|safe}}
+                    }
+                ]
+            },
+            options: {
+                legend: {
+                    position: "top"
+                },
+                tooltips: {
+                    enabled: true,
+                    intersect: !1,
+                    mode: "nearest",
+                    xPadding: 10,
+                    yPadding: 10,
+                    caretPadding: 10
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            fontColor: "rgba(0,0,0,0.5)",
+                            fontStyle: "bold",
+                            beginAtZero: true,
+                            maxTicksLimit: 10,
+                            padding: 20,
+                        },
+                        gridLines: {
+                            drawTicks: false,
+                            display: false
+                        }
+
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            drawTicks: false,
+                            display: false
+                        },
+                        ticks: {
+                            padding: 20,
+                            fontColor: "rgba(0,0,0,0.5)",
+                            fontStyle: "bold",
+                            maxTicksLimit: 10
+                        }
+                    }]
+                }
+            }
+        });
+    });
+
+  var ctx = document.getElementById("feedback-chart").getContext("2d");
+    var config = {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [
+                    {{wdata.recovered}}, {{wdata.deaths}},
+                ],
+                backgroundColor: [
+                    "#4099ff",
+                    "#81c1fd"
+                ],
+                label: 'Dataset 1',
+                borderWidth: 0
+            }],
+            labels: [
+                "Recovered",
+                "Deaths"
+            ]
+        },
+        options: {
+            responsive: true,
+            legend: {
+                display: false,
+            },
+            title: {
+                display: false,
+                text: 'Chart.js Doughnut Chart'
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        }
+    };
+    window.myDoughnut = new Chart(ctx, config);
+    // feedback chart end
+
+ 
+  
+
+</script>
+</body>
+
+</html>
